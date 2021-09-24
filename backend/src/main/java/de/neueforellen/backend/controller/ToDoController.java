@@ -31,18 +31,23 @@ public class ToDoController {
     }
 
     @DeleteMapping("api/todo/{id}")
-    public void deleteToDoByID(@PathVariable String id){
-        service.deleteToDoByID(id);
+    public ResponseEntity<Boolean> deleteToDoByID(@PathVariable String id){
+        if(service.deleteToDoByID(id)){
+            return ResponseEntity.ok().body(true);
+        }else{
+            return ResponseEntity.badRequest().body(false);
+        }
     }
 
     @PostMapping("api/todo")
-    public ToDo addTodo(@RequestParam ToDo toAdd){
+    public ToDo addTodo(@RequestBody ToDo toAdd){
         return service.addTodo(toAdd);
     }
 
+
     @PutMapping("api/todo/{id}")
-    public ToDo editToDoStatus(@PathVariable String id, String status){
-        return service.editToDoStatus(id, status);
+    public ToDo editToDoStatus(@PathVariable String id, @RequestBody ToDo toDo){
+        return service.editToDoStatus(toDo);
     }
 
 

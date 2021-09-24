@@ -18,8 +18,9 @@ public class ToDoRepo {
             return Optional.ofNullable(toDoRepoMap.get(id));
         }
 
-        public Optional<ToDo> deleteToDo(String id) {
-            return Optional.ofNullable(toDoRepoMap.remove(id));
+        public boolean deleteToDo(String toDelete) {
+            toDoRepoMap.remove(toDelete);
+            return !toDoRepoMap.containsKey(toDelete);
         }
 
         public ToDo addTodo(ToDo toDo) throws IllegalArgumentException {
@@ -31,9 +32,9 @@ public class ToDoRepo {
             return toDo;
         }
 
-        public ToDo editToDo(String id, String status) {
-            toDoRepoMap.get(id).setStatus(status);
-            return toDoRepoMap.get(id);
+        public ToDo editToDo(ToDo toEdit) {
+            toDoRepoMap.put(toEdit.getId(),toEdit);
+            return toEdit;
         }
 
 
