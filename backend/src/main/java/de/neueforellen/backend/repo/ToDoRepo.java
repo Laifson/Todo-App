@@ -41,7 +41,7 @@ public class ToDoRepo {
             if(toDoRepoMap.containsKey(toEdit.getId())){
                 return toDoRepoMap.put(toEdit.getId(),toEdit);
             }
-            throw new IllegalArgumentException("ToDo");
+            throw new IllegalArgumentException("Cant find ToDo with ID");
         }
 
         public void clearRepo(){

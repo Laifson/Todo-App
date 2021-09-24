@@ -15,6 +15,11 @@ public class ToDo {
     private String description;
     private String status;
 
+    public ToDo(String description, String status) {
+        this.description = description;
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
