@@ -33,12 +33,8 @@ public class ToDoController {
     }
 
     @DeleteMapping("api/todo/{id}")
-    public ResponseEntity<Boolean> deleteToDoByID(@PathVariable String id){
-        if(service.deleteToDoByID(id)){
-            return ResponseEntity.ok().body(true);
-        }else{
-            return ResponseEntity.badRequest().body(false);
-        }
+    public void deleteToDoByID(@PathVariable String id){
+        service.deleteToDoByID(id);
     }
 
     @PostMapping("api/todo")

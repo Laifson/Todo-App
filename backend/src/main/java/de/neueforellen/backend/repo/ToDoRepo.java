@@ -27,7 +27,9 @@ public class ToDoRepo {
         }
 
         public ToDo addTodo(ToDo toDo) throws IllegalArgumentException {
-            toDo.setId(UUID.randomUUID().toString());
+            if(toDo.getId() == null){
+                toDo.setId(UUID.randomUUID().toString());
+            }
             if(toDoRepoMap.containsKey(toDo.getId())) {
                 throw new IllegalArgumentException("Id already exists");
             }
@@ -40,6 +42,10 @@ public class ToDoRepo {
                 return toDoRepoMap.put(toEdit.getId(),toEdit);
             }
             throw new IllegalArgumentException("ToDo");
+        }
+
+        public void clearRepo(){
+            toDoRepoMap.clear();
         }
 
 
