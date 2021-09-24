@@ -108,18 +108,4 @@ class ToDoControllerTest {
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
     }
-
-    @Test
-    public void testdeleteToDoByIDException(){
-        //GIVEN
-        repo.addTodo(new ToDo("1","Erste Aufgabe", "OPEN"));
-        repo.addTodo(new ToDo("2","Zweite Aufgabe", "IN_PROGRESS"));
-        repo.addTodo(new ToDo("3","Dritte Aufgabe", "DONE"));
-        //WHEN
-        restTemplate.delete("/api/todo/4");
-        //THEN
-        assertThat(repo.findById("1"), is(Optional.of(new ToDo("1","Erste Aufgabe", "OPEN"))));
-        assertThat(repo.findById("2"), is(Optional.of(new ToDo("2","Zweite Aufgabe", "IN_PROGRESS"))));
-        assertThat(repo.findById("3"), is(Optional.of(new ToDo("3","Dritte Aufgabe", "DONE"))));
-    }
 }
