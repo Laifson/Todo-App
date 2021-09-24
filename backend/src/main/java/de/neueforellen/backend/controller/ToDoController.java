@@ -2,6 +2,7 @@ package de.neueforellen.backend.controller;
 
 import de.neueforellen.backend.model.ToDo;
 import de.neueforellen.backend.service.ToDoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,36 +18,31 @@ public class ToDoController {
 
     @GetMapping("api/todo")
     public List<ToDo> getAllTodos(){
-        //TODO get all ToDos
-        // service.getAllToDos() -> return List<ToDos>
-        return List.of(new ToDo());
+        return service.getAllTodos();
     }
 
     @GetMapping("api/todo/{id}")
-    public ToDo getToDoByID(@PathVariable String id){
-        //TODO find by ID
-        // service.getToDoByID(String id) -> return ToDo
-        return new ToDo();
+    public ResponseEntity<ToDo> getToDoByID(@PathVariable String id){
+        try{
+            return ResponseEntity.ok(service.getToDoById(id));
+        }catch(IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @DeleteMapping("api/todo/{id}")
     public void deleteToDoByID(@PathVariable String id){
-        //TODO delete
-        // service.deleteToDoByID(String id) -> void
+        service.deleteToDoByID(id);
     }
 
     @PostMapping("api/todo")
     public ToDo addTodo(@RequestParam ToDo toAdd){
-        //TODO add new Todo
-        // service.addToDo(ToDo) -> return ToDo
-        return new ToDo();
+        return service.addTodo(toAdd);
     }
 
     @PutMapping("api/todo/{id}")
     public ToDo editToDoStatus(@PathVariable String id, String status){
-        //TODO edit existing ToDO
-        //service.editToDo(String id) -> return ToDo
-        return new ToDo();
+        return service.editToDoStatus(id, status);
     }
 
 
