@@ -19,7 +19,7 @@ public class ToDoService {
     }
 
     public List<ToDo> getAllTodos(){
-        return toDoRepo.getAllTodos;
+        return toDoRepo.getAllTodos();
     }
 
     public ToDo getToDoById(String id) throws IllegalArgumentException{
@@ -30,20 +30,16 @@ public class ToDoService {
         throw new IllegalArgumentException("Todo not found by id: " + id);
     }
 
-    public void deleteToDoByID(String id) throws IllegalArgumentException{
-        Optional<ToDo> optionalToDo = toDoRepo.findById(id);
-        if(optionalToDo.isPresent()){
-            toDoRepo.delete(optionalToDo.get());
-        }
-        throw new IllegalArgumentException("ToDo not deleted by id: " + id);
+    public boolean deleteToDoByID(String toDelete){
+        return toDoRepo.deleteToDo(toDelete);
     }
 
     public ToDo addTodo(ToDo toDo){
-        return toDoRepo.add(toDo);
+        return toDoRepo.addTodo(toDo);
     }
 
-    public ToDo editToDoStatus(String id, String status){
-        return toDoRepo.edit(id, status);
+    public ToDo editToDoStatus(ToDo toEdit){
+        return toDoRepo.editToDo(toEdit);
     }
 
 }
