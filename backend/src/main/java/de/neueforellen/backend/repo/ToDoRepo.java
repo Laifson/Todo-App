@@ -8,7 +8,10 @@ import java.util.*;
 @Repository
 public class ToDoRepo {
 
-        private final Map<String, ToDo> toDoRepoMap = new HashMap();
+    public ToDoRepo() {
+    }
+
+    private final Map<String, ToDo> toDoRepoMap = new HashMap();
 
         public List<ToDo> getAllTodos() {
             return List.copyOf(toDoRepoMap.values());
@@ -33,8 +36,10 @@ public class ToDoRepo {
         }
 
         public ToDo editToDo(ToDo toEdit) {
-            toDoRepoMap.put(toEdit.getId(),toEdit);
-            return toEdit;
+            if(toDoRepoMap.containsKey(toEdit.getId())){
+                return toDoRepoMap.put(toEdit.getId(),toEdit);
+            }
+            throw new IllegalArgumentException("ToDo");
         }
 
 

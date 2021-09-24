@@ -2,8 +2,10 @@ package de.neueforellen.backend.controller;
 
 import de.neueforellen.backend.model.ToDo;
 import de.neueforellen.backend.service.ToDoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,11 +24,11 @@ public class ToDoController {
     }
 
     @GetMapping("api/todo/{id}")
-    public ResponseEntity<ToDo> getToDoByID(@PathVariable String id){
+    public ToDo getToDoByID(@PathVariable String id){
         try{
-            return ResponseEntity.ok(service.getToDoById(id));
+            return service.getToDoById(id);
         }catch(IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(null);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -49,6 +51,5 @@ public class ToDoController {
     public ToDo editToDoStatus(@PathVariable String id, @RequestBody ToDo toDo){
         return service.editToDoStatus(toDo);
     }
-
 
 }
