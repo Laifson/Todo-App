@@ -15,9 +15,9 @@ import static org.mockito.Mockito.when;
 
 class ToDoServiceTest {
 
-    private ToDoRepo repo = Mockito.mock(ToDoRepo.class);
+    private final ToDoRepo repo = Mockito.mock(ToDoRepo.class);
 
-    private ToDoService service = new ToDoService(repo);
+    private final ToDoService service = new ToDoService(repo);
 
     @BeforeEach
     public void clearRepo(){
